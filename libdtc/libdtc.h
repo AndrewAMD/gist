@@ -26,8 +26,6 @@ typedef struct LDTC_CONFIG
 
 
 
-typedef uint8_t LDTC_ID;
-
 
 
 // immediately returns handler of new connection.
@@ -38,21 +36,20 @@ typedef uint8_t LDTC_ID;
 // If not set, there will be one connection.
 void dtc_set_number_of_connections(int n_connections);
 
-// REGARDING CONNECTION ID'S:
-// The connection will be numbered from zero thru (n_connections - 1).
+typedef uint8_t LDTC_ID;  // Socket ID's
+// REGARDING SOCKET ID'S:
+// The sockets will be numbered from zero thru (n_connections - 1).
 // For example, if there are four connections, the ID's will be 0, 1, 2, & 3.
 
 
 
 enum LDTC_STATUS
 {
-  status_please_wait = 0,       // Nothing to report at this time.
+  status_not_done = 0,          // Nothing to report at this time.
   status_have_message = 1,      // High priority output! Must read all messages on queue to make this disappear.
-  status_satisfied = 2,         // We are waiting on nothing, all is well.
-  status_connection_failed =11,
-  status_handshake_failed = 12,
-  status_login_failed = 13,
-  // TO DO
+  status_satisfied = 2,         // Connection is active, and there is no output to block for.
+  status_uninitiated = 11,      // This socket is standing by for launch.
+  status_terminated = 12,       // This socket is done operating. To use again, re-launch this socket.
 }
 
 // Returns the status of the connection within limit milliseconds.
