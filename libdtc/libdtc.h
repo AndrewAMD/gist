@@ -41,20 +41,23 @@ typedef uint8_t LDTC_ID;  // Socket ID's
 // The sockets will be numbered from zero thru (n_connections - 1).
 // For example, if there are four connections, the ID's will be 0, 1, 2, & 3.
 
-
+// launches the given socket with the given configuration.
+// If open, the socket will be closed and re-launched with the new configuration.
+// Returns if command accepted, false if command rejected.
+bool dtc_launch(LDTC_ID id, LDTC_CONFIG);
 
 enum LDTC_STATUS
 {
-  status_not_done = 0,          // Nothing to report at this time.
-  status_have_message = 1,      // High priority output! Must read all messages on queue to make this disappear.
-  status_satisfied = 2,         // Connection is active, and there is no output to block for.
+  status_satisfied = 0,         // Connection is active, and there is no output to block for.
+  status_unsatisfied = 1,       // Awaited response not yet received.  Check status again.
+  status_unread_messages = 2,   // One or more messages are ready to be printed/logged. Must read to get other status codes. 
   status_uninitiated = 11,      // This socket is standing by for launch.
-  status_terminated = 12,       // This socket is done operating. To use again, re-launch this socket.
+  status_terminated = 12        // This socket is done operating. To use again, re-launch this socket.
 }
 
 // Returns the status of the connection within limit milliseconds.
 // If the limit is zero, the status returns immediately.
-LDTC_STATUS ldtc_status(LDTC_HANDLE h, int limit_ms);
+LDTC_STATUS ldtc_status(LDTC_ID id, int limit_ms);
 
 #define LDTC_MESSAGE_LENGTH 256
 
@@ -66,6 +69,6 @@ LDTC_STATUS ldtc_status(LDTC_HANDLE h, int limit_ms);
 //  2: Print to screen
 //  3: Pop up dialog
 // alert_level will be ignored if user supplies a NULL pointer.
-int ldtc_message(LDTC_HANDLE h, char* msg_output, int* alert_level);
+int ldtc_message(LDTC_ID id, char* msg_output, int* alert_level);
 
 
