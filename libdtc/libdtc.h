@@ -55,7 +55,7 @@ enum LDTC_STATUS
   status_unread_messages = 2,   // One or more messages are ready to be printed/logged. Must read to get other status codes. 
   status_uninitiated = 11,      // This socket is standing by for launch.
   status_terminated = 12        // This socket is done operating. To use again, re-launch this socket.
-}
+};
 
 // Returns the status of the connection within limit milliseconds.
 // If the limit is zero, the status returns immediately.
