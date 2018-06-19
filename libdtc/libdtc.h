@@ -16,28 +16,37 @@
 // Note that a "block limit" is not to be confused with a "timeout".
 // For example, in Zorro, a healthy Broker Plugin will run BrokerProgress() every ~10ms or so in order to keep the menu buttons alive on the GUI.
 
-typedef struct DTC_CONNECTION_CONFIG
+typedef struct LDTC_CONFIG
 {
   char host[32];
   char port[32];
   bool tls_enabled;
   // TO DO
-} DTC_CONNECTION_CONFIG;
+} LDTC_CONFIG;
+
+typedef uint32_t LDTC_HANDLE;
 
 // immediately returns handler of new connection.
 // Connection task is assigned to background thread.
 // Returns handler to this new connection.
-uint32_t new_connection(DTC_CONNECTION_CONFIG* config);
+LDTC_HANDLE ldtc_new_connection(LDTC_CONFIG* config);
 
-enum DTC_CONNECTION_STATUS
+enum LDTC_STATUS
 {
-  status_please_wait = 0,
-  status_connection_failed =1,
-  status_handshake_failed = 2,
-  status_login_failed = 3,
-  status_login_successful = 4,
+  status_please_wait = 0,       // Nothing to report at this time.
+  status_have_message = 1,      // High priority output! Must read all messages on queue to make this disappear.
+  status_satisfied = 2,         // We are waiting on nothing, all is well.
+  status_connection_failed =11,
+  status_handshake_failed = 12,
+  status_login_failed = 13,
   // TO DO
 }
 
-// immediately returns the status of the connection.
-DTC_CONNECTION_STATUS check_connection(uint32_t handler);
+// Returns the status of the connection within limit milliseconds.
+// If the limit is zero, the status returns immediately.
+LDTC_STATUS ldtc_status(LDTC_HANDLE h, int limit_ms);
+
+// Returns a (temporary) pointer to the next available message or NULL if none available.
+// This will pop the first message from the front of the message queue.
+// Once this function is called again, the previous pointer will be invalid.
+const char* ldtc_message(LDTC_HANDLE h);
