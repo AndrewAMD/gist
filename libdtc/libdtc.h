@@ -44,7 +44,7 @@ typedef uint8_t LDTC_ID;  // Socket ID's
 // launches the given socket with the given configuration.
 // If open, the socket will be closed and re-launched with the new configuration.
 // Returns if command accepted, false if command rejected.
-bool dtc_launch(LDTC_ID id, LDTC_CONFIG);
+bool dtc_launch(LDTC_ID id, const LDTC_CONFIG* config);
 
 enum LDTC_STATUS
 {
