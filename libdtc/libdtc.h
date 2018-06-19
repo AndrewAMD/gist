@@ -26,17 +26,11 @@ typedef struct LDTC_CONFIG
   // TO DO
 } LDTC_CONFIG;
 
-
-
-
-
-// immediately returns handler of new connection.
-// Connection task is assigned to background thread.
-// Returns handler to this new connection.
-// LDTC_ID ldtc_new_connection(LDTC_CONFIG* config);
-
+// Sets the number of sockets.  (If not set, the default is 1).
+// Returns true if command accepted - false if rejected.
 // If not set, there will be one connection.
-void dtc_set_number_of_connections(int n_connections);
+// If the number of sockets is decreasing, the disappearing sockets will be terminated first.
+bool dtc_set_num_sockets(int num_sockets);
 
 typedef uint8_t LDTC_ID;  // Socket ID's
 // REGARDING SOCKET ID'S:
@@ -44,6 +38,10 @@ typedef uint8_t LDTC_ID;  // Socket ID's
 // For example, if there are four connections, the ID's will be 0, 1, 2, & 3.
 
 // launches the given socket with the given configuration.
+// If this is the first launch, a new thread will be created - it will stay open for the duration of the program,
+//     even if all sockets are closed.
+// For any launch after that, the communications tasks will simply be added to the same background thread.
+// This thread will continuously operate asynchronously.
 // If open, the socket will be closed and re-launched with the new configuration.
 // Returns if command accepted, false if command rejected.
 bool dtc_launch(LDTC_ID id, const LDTC_CONFIG* config);
