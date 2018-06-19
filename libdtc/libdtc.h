@@ -1,20 +1,22 @@
 // This would be a simple C interface for a DTC Protocol client library.
 
 // It would have a dedicated thread running in the background. I would design all of these functions to be thread-safe.
-// However, it would allow users to optionally supply callback functions - which would **NOT** be thread-safe.
+// It would also allow users to optionally supply callback functions.  But it **never** pushes data to the callbacks.
+
 // The idea is simple: The user must explicitly ask for data to get data.
-// That is, this library does not push any data.
-// But the callbacks can indicate the presence of new data.
+// The callbacks simply indicate the presence of new data.
 
-// This type of a setup is perfect for triggering timers to interrupt sleep.
-
-// This library allows as many simultaneous connections as desired.  You can track any given connection with a handler.
-// Also, you can count the number of active connections.
+// This library allows as many simultaneous socket connections as desired.
+// You can track a socket by a socket ID.  You can launch, terminate, and re-launch any given socket.
 // Most DTC servers will supply one or two ports to cover all functionality.  Sierra Chart's built-in server has two ports.
 
 // This library promotes asynchronous usage by returning immediately unless a block limit is supplied.
 // Note that a "block limit" is not to be confused with a "timeout".
-// For example, in Zorro, a healthy Broker Plugin will run BrokerProgress() every ~10ms or so in order to keep the menu buttons alive on the GUI.
+// For example, in Zorro, a healthy Broker Plugin will run BrokerProgress() every ~10ms or so in order 
+//    to keep the menu buttons alive on the GUI.
+// In that case, the command will unblock the very instant it receives the required response - or 10ms, whichever comes first.
+// Optionally, you can block synchronously until a required response is received.  
+//    This approach is **not** recommended, because your program will be entirely stalled until satisfaction (or timeout).
 
 typedef struct LDTC_CONFIG
 {
