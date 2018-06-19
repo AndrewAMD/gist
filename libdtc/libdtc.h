@@ -48,9 +48,9 @@ LDTC_STATUS ldtc_status(LDTC_HANDLE h, int limit_ms);
 
 #define LDTC_MESSAGE_LENGTH 256
 
-// Writes a message to the input char array of size LDTC_MESSAGE_LENGTH.
+// Writes a message to the supplied char array of size LDTC_MESSAGE_LENGTH.
 // This will pop the first message from the front of the message queue.
 // Returns the number of messages remaining on the queue, or -1 if there was an error.
-int ldtc_message(LDTC_HANDLE h, char* msg);
+int ldtc_message(LDTC_HANDLE h, char* msg_output);
 
 
