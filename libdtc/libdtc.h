@@ -46,11 +46,6 @@ enum LDTC_STATUS
 // If the limit is zero, the status returns immediately.
 LDTC_STATUS ldtc_status(LDTC_HANDLE h, int limit_ms);
 
-// Returns a (temporary) pointer to the next available message or NULL if none available.
-// This will pop the first message from the front of the message queue.
-// Once this function is called again, the previous pointer will be invalid.
-//const char* ldtc_message(LDTC_HANDLE h);
-
 #define LDTC_MESSAGE_LENGTH 256
 
 // Writes a message to the input char array of size LDTC_MESSAGE_LENGTH.
