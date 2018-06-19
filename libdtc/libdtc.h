@@ -24,12 +24,25 @@ typedef struct LDTC_CONFIG
   // TO DO
 } LDTC_CONFIG;
 
-typedef uint32_t LDTC_HANDLE;
+
+
+typedef uint8_t LDTC_ID;
+
+
 
 // immediately returns handler of new connection.
 // Connection task is assigned to background thread.
 // Returns handler to this new connection.
-LDTC_HANDLE ldtc_new_connection(LDTC_CONFIG* config);
+// LDTC_ID ldtc_new_connection(LDTC_CONFIG* config);
+
+// If not set, there will be one connection.
+void dtc_set_number_of_connections(int n_connections);
+
+// REGARDING CONNECTION ID'S:
+// The connection will be numbered from zero thru (n_connections - 1).
+// For example, if there are four connections, the ID's will be 0, 1, 2, & 3.
+
+
 
 enum LDTC_STATUS
 {
@@ -51,6 +64,11 @@ LDTC_STATUS ldtc_status(LDTC_HANDLE h, int limit_ms);
 // Writes a message to the supplied char array of size LDTC_MESSAGE_LENGTH.
 // This will pop the first message from the front of the message queue.
 // Returns the number of messages remaining on the queue, or -1 if there was an error.
-int ldtc_message(LDTC_HANDLE h, char* msg_output);
+// Optionally, user will supply pointer to int alert_level: output level of alert required:
+//  1: Log only
+//  2: Print to screen
+//  3: Pop up dialog
+// alert_level will be ignored if user supplies a NULL pointer.
+int ldtc_message(LDTC_HANDLE h, char* msg_output, int* alert_level);
 
 
