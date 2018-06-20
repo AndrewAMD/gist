@@ -61,7 +61,12 @@ enum LDTC_STATUS
 
 // Returns the status of the connection within limit milliseconds.
 // If the limit is zero, the status returns immediately.
-LDTC_STATUS ldtc_status(LDTC_ID id, int limit_ms);
+// To check whether or not a certain response was received, supply a RESPONSE_HANDLE
+//    returned from one of the other functions.
+//    Otherwise, set h to NULL.
+// If the response was received, returns status_satisfied.
+// If the response was not yet received after limit_ms milliseconds, returns status_satisfied.
+LDTC_STATUS ldtc_status(LDTC_ID id, RESPONSE_HANDLE h, int limit_ms);
 
 #define LDTC_MESSAGE_LENGTH 256
 
