@@ -18,6 +18,10 @@
 // Optionally, you can block synchronously until a required response is received.  
 //    This approach is **not** recommended, because your program will be entirely stalled until satisfaction (or timeout).
 
+// Various functions return what is called a "response handle".
+// You can track if and when a response to a certain message has been received.
+typedef uint64_t RESPONSE_HANDLE;
+
 typedef struct LDTC_CONFIG
 {
   char host[32];
