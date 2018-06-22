@@ -1,8 +1,7 @@
 #include <iostream>
 #include <thread>
-#include <boost/asio.hpp>
-#include <boost/asio/use_future.hpp>
-#include "lambda_return_type.hpp"
+#include "post_function_use_future.hpp"
+
 namespace asio = boost::asio;
 
 int SayHello()
@@ -18,38 +17,21 @@ T GetSum(T a, T b)
 	return a + b;
 }
 
-
-template <typename LambdaWithReturnNoArgs, typename ExecutionContext>
-auto perform_asyncly(ExecutionContext& ctx, LambdaWithReturnNoArgs f)
-{
-	using handler_type = typename asio::handler_type
-		<asio::use_future_t<>, void(boost::system::error_code, return_type_t<LambdaWithReturnNoArgs>)>::type;
-
-	handler_type handler{ asio::use_future };
-	asio::async_result<handler_type> result(handler);
-
-	asio::post(ctx, [handler, f]() mutable {
-		handler(boost::system::error_code{}, f());
-	});
-
-	return result.get();
-}
-
-
 int main() {
-	asio::io_service ios;
-	asio::io_service::work wrk{ ios };
-	std::thread t{ [&] { ios.run(); } };
+	asio::io_context io;
+	auto wg = asio::make_work_guard(io);
+
+	std::thread t{ [&] { io.run(); } };
 		
-	auto res1 = perform_asyncly(ios, []() {return  SayHello(); });
+	auto res1 = post_function_use_future(io, SayHello);
 	res1.get(); // block until return value received.
 	
-	auto res2 = perform_asyncly(ios, []() {return  GetSum(20, 14); });
+	auto res2 = post_function_use_future(io, []() {return  GetSum(20, 14); });
 	std::cout << res2.get() << std::endl; // block until return value received.
-
-	ios.stop();
-	t.join();
-
+	
+	wg.reset();
+	if(t.joinable()) t.join();
+	
 	return 0;
 }
 
