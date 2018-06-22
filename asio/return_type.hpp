@@ -1,5 +1,5 @@
-#ifndef FUNCTION_RETURN_TYPE_HPP
-#define FUNCTION_RETURN_TYPE_HPP
+#ifndef RETURN_TYPE_HPP
+#define RETURN_TYPE_HPP
 
 template <typename F>
 struct return_type_impl;
