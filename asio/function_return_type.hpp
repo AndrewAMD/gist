@@ -1,5 +1,5 @@
-#ifndef LAMBDA_RETURN_TYPE_HPP
-#define LAMBDA_RETURN_TYPE_HPP
+#ifndef FUNCTION_RETURN_TYPE_HPP
+#define FUNCTION_RETURN_TYPE_HPP
 
 template <typename F>
 struct return_type_impl;
