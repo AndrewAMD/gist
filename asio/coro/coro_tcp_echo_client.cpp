@@ -8,18 +8,16 @@
 namespace asio = boost::asio;
 using tcp = asio::ip::tcp;               // from <boost/asio/ip/tcp.hpp>
 
-												//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
-												// Report a failure
-void
-fail(boost::system::error_code ec, char const* what)
+// Report a failure
+void fail(boost::system::error_code ec, char const* what)
 {
 	std::cerr << what << ": " << ec.message() << "\n";
 }
 
 // Sends a WebSocket message and prints the response
-void
-do_session(
+void do_session(
 	std::string const& host,
 	std::string const& port,
 	std::string const& text,
@@ -55,7 +53,7 @@ do_session(
 
 	// This buffer will hold the incoming message
 	std::vector<char> b;
-	b.resize(msg_out.size()+1);  // room for 
+	b.resize(msg_out.size()+1);  // room for null terminator
 	
 	// Read a message into our buffer
 	asio::async_read(socket, asio::buffer(b, msg_out.size()), yield[ec]);
