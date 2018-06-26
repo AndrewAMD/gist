@@ -1,6 +1,6 @@
 # Coroutines for TCP Client
 
-## References/Templates to be used:
+## Templates to be used:
 
 * https://www.boost.org/doc/libs/1_67_0/doc/html/boost_asio/example/cpp03/timeouts/async_tcp_client.cpp
 * https://www.boost.org/doc/libs/1_67_0/doc/html/boost_asio/example/cpp03/ssl/client.cpp
