@@ -92,17 +92,14 @@ int main(int argc, char** argv)
 	asio::io_context ioc;
 
 	// Launch the asynchronous operation
-	asio::spawn(ioc, std::bind(
-		&do_session,
-		std::string(host),
-		std::string(port),
-		std::string(text),
-		std::ref(ioc),
-		std::placeholders::_1));
-
-	// Run the I/O service. The call will return when
-	// the socket is closed.
-	ioc.run();
+	asio::spawn(ioc, [&](asio::yield_context yield)
+	{
+		do_session(std::string(host),
+			std::string(port),
+			std::string(text),
+			ioc,
+			yield);
+	});
 
 	return EXIT_SUCCESS;
 }
