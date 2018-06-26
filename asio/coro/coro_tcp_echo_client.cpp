@@ -101,5 +101,9 @@ int main(int argc, char** argv)
 			yield);
 	});
 
+	// Run the I/O service. The call will return when
+	// the socket is closed.
+	ioc.run();
+
 	return EXIT_SUCCESS;
 }
