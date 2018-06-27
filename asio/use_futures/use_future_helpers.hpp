@@ -2,6 +2,7 @@
 #define USE_FUTURE_HELPERS_HPP
 
 #include <boost/asio.hpp>
+#include <boost/asio/spawn.hpp>
 #include "return_type.hpp"
 
 template <typename ExecutionContext, typename FuncWithReturnNoArgs>
@@ -33,6 +34,23 @@ auto async_wait_use_future(TimerType& timer, FuncWithReturnEC f)
 
 	timer.async_wait([handler, f](const boost::system::error_code& ec) mutable {
 		handler(boost::system::error_code(), f(ec));
+	});
+
+	return result.get();
+}
+
+template <typename ExecutionContext, typename FuncWithReturnYield>
+auto spawn_use_future(ExecutionContext& ctx, FuncWithReturnYield f)
+{
+	using Sig = void(boost::system::error_code, return_type_t<FuncWithReturnYield>);
+	using Result = typename asio::async_result<boost::asio::use_future_t<>, Sig>;
+	using Handler = typename Result::completion_handler_type;
+
+	Handler handler(std::forward<decltype(boost::asio::use_future)>(boost::asio::use_future));
+	Result result(handler);
+
+	boost::asio::spawn(ctx, [handler, f](boost::asio::yield_context yield) mutable {
+		handler(boost::system::error_code(), f(yield));
 	});
 
 	return result.get();
