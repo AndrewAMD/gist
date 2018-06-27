@@ -16,7 +16,7 @@ void fail(boost::system::error_code ec, char const* what)
 	std::cerr << what << ": " << ec.message() << "\n";
 }
 
-// Sends a WebSocket message and prints the response
+// Sends a message and prints the response
 void do_session(
 	std::string const& host,
 	std::string const& port,
@@ -60,7 +60,7 @@ void do_session(
 	if (ec)
 		return fail(ec, "read");
 
-	// Close the WebSocket connection
+	// Close the socket connection
 	socket.close();
 
 	// If we get here then the connection is closed gracefully
@@ -77,9 +77,9 @@ int main(int argc, char** argv)
 	if (argc != 4)
 	{
 		std::cerr <<
-			"Usage: websocket-client-coro <host> <port> <text>\n" <<
+			"Usage: coro_tcp_echo_client <host> <port> <text>\n" <<
 			"Example:\n" <<
-			"    websocket-client-coro echo.websocket.org 80 \"Hello, world!\"\n";
+			"    coro_tcp_echo_client 127.0.0.1 8080 \"Hello, world!\"\n";
 		return EXIT_FAILURE;
 	}
 	auto const host = argv[1];
