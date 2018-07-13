@@ -9,7 +9,7 @@ template <typename ExecutionContext, typename FuncWithReturnNoArgs>
 auto post_use_future(ExecutionContext& ctx, FuncWithReturnNoArgs f)
 {
 	using Sig = void(boost::system::error_code, return_type_t<FuncWithReturnNoArgs>);
-	using Result = typename asio::async_result<boost::asio::use_future_t<>, Sig>;
+	using Result = typename boost::asio::async_result<boost::asio::use_future_t<>, Sig>;
 	using Handler = typename Result::completion_handler_type;
 
 	Handler handler(std::forward<decltype(boost::asio::use_future)>(boost::asio::use_future));
@@ -26,7 +26,7 @@ template <typename TimerType, typename FuncWithReturnEC>
 auto async_wait_use_future(TimerType& timer, FuncWithReturnEC f)
 {
 	using Sig = void(boost::system::error_code, return_type_t<FuncWithReturnEC>);
-	using Result = typename asio::async_result<boost::asio::use_future_t<>, Sig>;
+	using Result = typename boost::asio::async_result<boost::asio::use_future_t<>, Sig>;
 	using Handler = typename Result::completion_handler_type;
 
 	Handler handler(std::forward<decltype(boost::asio::use_future)>(boost::asio::use_future));
@@ -43,7 +43,7 @@ template <typename ExecutionContext, typename FuncWithReturnYield>
 auto spawn_use_future(ExecutionContext& ctx, FuncWithReturnYield f)
 {
 	using Sig = void(boost::system::error_code, return_type_t<FuncWithReturnYield>);
-	using Result = typename asio::async_result<boost::asio::use_future_t<>, Sig>;
+	using Result = typename boost::asio::async_result<boost::asio::use_future_t<>, Sig>;
 	using Handler = typename Result::completion_handler_type;
 
 	Handler handler(std::forward<decltype(boost::asio::use_future)>(boost::asio::use_future));
