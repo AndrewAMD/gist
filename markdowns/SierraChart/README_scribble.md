@@ -1,12 +1,34 @@
 # Sierra Chart Plugin for Zorro
 
+This plugin works both as a broker plugin to Zorro Trading Automation and as a client to Sierra Chart in order to:
+1) Get live market data, including market depth
+2) Get historical market data
+3) Trade algorithmically
+4) Track your trading account
+
+This plugin compiles into a DLL.  Simply place it in Zorro's .\Plugin folder.
+
+## About Sierra Chart
+
 Sierra Chart is a trading platform with support for many brokers.
 
+Sierra Chart has a fully integ
 
+## Regarding Networking
 
+A Sierra Chart instance can be accessed locally or over the internet.
 
+This plugin only uses TLS encryption.  Unencrypted connections are not supported by this plugin.
 
+## Dependencies
 
+This plugin depends on the following libraries:
+
+* Boost Asio 1.66 (for asynchronous network communications)
+* Boost UUID (to generate order Client ID's)
+* OpenSSL (for TLS 1.2 encryption)
+* zlib (optional historical data compression)
+* DTC Protocol library
 
 Ally Invest is an low-commission stocks and options broker for USA residents.  Ally offers its users a REST API, which uses XML and JSON.  Orders are placed in a FIXML-variant language.
 
@@ -14,12 +36,9 @@ This plugin was written in Win32 C/C++ using Visual Studio 2017.
 
 ## Build Instructions
 
-All dependencies have been fully integrated into the folder and slightly modified where necessary. They are:
+Build in Visual Studio 2017 or greater, linking to the above dependencies.  This plugin must be compiled in 32-bit (x86) in order to be compatible with Zorro.
 
-* liboauthcpp (for OAuth 1.0a authentication)
-* pugixml (for XML parsing and writing)
-
-This project includes a Visual Studio 2017 solution.  You should be able to simply download the entire folder, open the solution, and build it, using the _**Release x86**_ build configuration.
+Zorro has its own OpenSSL DLL's, so the default build re-uses these.
 
 ## Installation Instructions
 
