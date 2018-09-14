@@ -99,9 +99,9 @@ These BrokerCommand functions have originated with this plugin:
 ## Known Issues
 (TODO: list known issues)
 
-## MIT License
+## License
 
-This project is MIT-licensed. See the LICENSE.md file for more details.
+This project has an MIT-style license. See the LICENSE.md file for more details.
 
 ## Resources
 
@@ -109,3 +109,10 @@ This project is MIT-licensed. See the LICENSE.md file for more details.
 * [The Zorro Project - Manual](http://zorro-project.com/manual/)
 * [Ally Invest](https://www.ally.com/invest/)
 * [Ally Invest API Documentation](https://www.ally.com/api/invest/documentation/getting-started/)
+
+## Contact Info
+
+For questions and inquiries, I can be reached via email:
+
+Andrew M. Dolder, P.E. (Indiana PE11800299)
+andrew@vitaltrades.com
