@@ -115,7 +115,5 @@ This project has an MIT-style license. See the LICENSE.md file for more details.
 For questions and inquiries, I can be reached via email:
 
 Andrew M. Dolder, P.E. 
-
 (Indiana PE11800299)
-
 andrew@vitaltrades.com
