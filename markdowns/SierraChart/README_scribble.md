@@ -36,6 +36,16 @@ Sierra Chart has a fully integrated DTC Server.  It has two dedicated ports:
 
 A Sierra Chart instance can be accessed locally or over the internet. This plugin only uses TLS encryption.  Unencrypted connections are not supported by this plugin.
 
+To set up Sierra Chart's DTC Server:
+* Open Sierra Chart
+* Global Settings -> Data/Trade Service Settings
+* SC Server Settings
+  * Check "Enable DTC Protocol Server"
+  * Check "Require TLS"
+  * Optional: Check "Allow Trading"
+  * Optional: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+
 (TODO: Set up server instructions)
 (TODO: Set up second server instructions)
 
