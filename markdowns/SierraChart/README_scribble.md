@@ -6,21 +6,9 @@ This plugin works both as a broker plugin to Zorro Trading Automation and as a c
 3) Trade algorithmically
 4) Track your trading account
 
-This plugin compiles into a DLL.  Simply place it in Zorro's .\Plugin folder.
+This plugin was written in Win32 C/C++ using Visual Studio 2017.
 
-## About Sierra Chart
-
-Sierra Chart is a trading platform with support for many brokers.
-
-Sierra Chart has a fully integ
-
-## Regarding Networking
-
-A Sierra Chart instance can be accessed locally or over the internet.
-
-This plugin only uses TLS encryption.  Unencrypted connections are not supported by this plugin.
-
-## Dependencies
+## Build Instructions
 
 This plugin depends on the following libraries:
 
@@ -30,19 +18,32 @@ This plugin depends on the following libraries:
 * zlib (optional historical data compression)
 * DTC Protocol library
 
-Ally Invest is an low-commission stocks and options broker for USA residents.  Ally offers its users a REST API, which uses XML and JSON.  Orders are placed in a FIXML-variant language.
-
-This plugin was written in Win32 C/C++ using Visual Studio 2017.
-
-## Build Instructions
-
 Build in Visual Studio 2017 or greater, linking to the above dependencies.  This plugin must be compiled in 32-bit (x86) in order to be compatible with Zorro.
-
-Zorro has its own OpenSSL DLL's, so the default build re-uses these.
 
 ## Installation Instructions
 
-To install the plugin, simply place the AllyInvest.dll file in the Plugin folder where Zorro is installed.
+To install the plugin, simply place the SierraChart.dll file in the Plugin folder where Zorro is installed.
+
+## About Sierra Chart
+
+Sierra Chart is a trading platform with support for many brokers.
+
+Sierra Chart has a fully integrated DTC Server.  It has two dedicated ports:
+1) One for all trading, current market data, account data, and position data.
+2) One for all historical market data.
+
+## Configuring Sierra Chart DTC Server
+
+A Sierra Chart instance can be accessed locally or over the internet. This plugin only uses TLS encryption.  Unencrypted connections are not supported by this plugin.
+
+(TODO: Set up server instructions)
+(TODO: Set up second server instructions)
+
+## Configuring Zorro
+
+(TODO: Define all parsed fields in Username)
+(TODO: Define password
+
 
 ## Login Instructions
 
@@ -74,12 +75,8 @@ The following standard Zorro Broker API functions have been implemented:
 * BrokerTime
 * BrokerAsset
 * BrokerHistory2
-  * Historical data is only available for stocks in M1 and M5 formats.
-  * Officially, the API only provides 5 days of history. (Nonetheless, the API appears to provide 1 year of equities history.)
-  * No options history is available.
 * BrokerBuy
-  * The broker API does not include "trade management".
-  * Instead, one buys/sells to open and buys/sells to close.
+
 * BrokerCommand standard functions:
   * GET\_COMPLIANCE
   * GET\_POSITION
@@ -98,27 +95,9 @@ These BrokerCommand functions have originated with this plugin:
   * For example, if you SET_COMBO_LEGS to 2 and then request two options orders, the order will finally process after the second options order is received.
   * If the order fails, the last leg will return a failure.  The script writer will be responsible for zeroing out the prior legs.
   * All of the legs must have matching **expiration months** and **underlying symbols**.  Otherwise, the order will not be submitted.
-  * Below is an example of a two-leg order message the plugin might submit to the Ally Invest servers:
-```
-<FIXML xmlns="http://www.fixprotocol.org/FIXML-5-0-SP2">
-  <NewOrdMleg TmInForce="0" Px="-3.10" OrdTyp="2" Acct="12345678">
-    <Ord OrdQty="4" PosEfct="O">
-      <Leg Side="1" Strk="190" Mat="2014-01-18T00:00:00.000-05:00" MMY="201401" SecTyp="OPT" CFI="OC" Sym="IBM"/>
-    </Ord>
-    <Ord OrdQty="4" PosEfct="O">
-      <Leg Side="2" Strk="200" Mat="2014-01-18T00:00:00.000-05:00" MMY="201401" SecTyp="OPT" CFI="OC" Sym="IBM"/>
-    </Ord>
-  </NewOrdMleg>
-</FIXML>
-```
-* SET\_DIAGNOSTICS
-  * Input: 1 to enable, 0 to disable.
-  * Returns 1 if command accepted, 0 if command rejected.
-  * When enabled, all xml communications will be dumped into the Zorro\Log folder for diagnostic purposes.
 
 ## Known Issues
-1. On holidays, broker API might say that the market is open when it is closed.  Broker has not solved this issue as of 2017-05.
-2. Server will sometimes return ask/bid quotes of 0.00 after hours / on weekends.  In this case, the plugin might use the latest historical M1 data instead and treat it as a quote.  However, it will declare a spread of zero.
+(TODO: list known issues)
 
 ## MIT License
 
