@@ -112,7 +112,7 @@ This project has an MIT-style license. See the LICENSE.md file for more details.
 
 ## Contact Info
 
-For questions and inquiries, I can be reached via email:
+For any questions and inquiries, I can be reached via email:
 
 * Andrew M. Dolder
 * andrew@vitaltrades.com
