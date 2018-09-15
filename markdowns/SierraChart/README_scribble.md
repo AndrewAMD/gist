@@ -84,25 +84,38 @@ To login with the Ally Plugin, you will first need to set up API access with All
 The following standard Zorro Broker API functions have been implemented:
 
 * BrokerOpen
-* BrokerHTTP
 * BrokerLogin
 * BrokerTime
 * BrokerAsset
+* BrokerAccount
 * BrokerHistory2
-* BrokerBuy
+* BrokerBuy2 (orders only)
+* BrokerTrade (orders only)
 
 * BrokerCommand standard functions:
-  * GET\_COMPLIANCE
-  * GET\_POSITION
-  * GET\_OPTIONS
-  * GET\_UNDERLYING
-  * SET\_SYMBOL
-  * SET\_MULTIPLIER
-  * SET\_COMBO\_LEGS
-  * SET\_DIAGNOSTICS
+  * GET_MAXTICKS
+  * SET_HWND
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * aaaaaaaaa
+  * SET\_DIVIDEND\_ADJ (new BrokerCommand)
+  * GET_DTCSECURITYDEF (new Broke
 
 These BrokerCommand functions have originated with this plugin:
-* SET\_COMBO\_LEGS
+* SET\_DIVIDEND\_ADJ
+* GET\_DTCSECURITYDEF
+* EXAMPLE
   * Input: Only accepts 2, 3, or 4 as an input, for 2-leg, 3-leg, and 4-leg orders, respectively.
   * Returns 1 if command accepted, 0 if rejected.
   * To use, call the function and then call the orders immediately.
