@@ -112,7 +112,7 @@ In addition, BrokerCommand supports some newly-defined functions:
   * Input: 1 for dividend-adjusted historical data, 0 for unadjusted historical data.
   * Returns 1 if command accepted, 0 if rejected.
 * GET\_DTCSECURITYDEF
-  * Input: Pointer to a DTCSECURITYDEF struct. GET\_DTCSECURITYDEF will look up a Security with symbol set with SET_SYMBOL.
+  * Input: Pointer to a DTCSECURITYDEF struct. GET\_DTCSECURITYDEF will look up a Security with symbol set with SET_SYMBOL.  The DTCSECURITYDEF struct will be filled with the original values from the DTC server.
   * Returns: 1 if operation was successful, 0 if failed.
 ```c++
 #define SET_DIVIDEND_ADJ 140 // Input 1 to enable dividend adjusted history, 0 for no dividend adjustment
@@ -147,16 +147,9 @@ typedef struct DTCSECURITYDEF
 	char Currency[8];
 } DTCSECURITYDEF;
 ```
-* EXAMPLE\_BC
-  * Input: Only accepts 2, 3, or 4 as an input, for 2-leg, 3-leg, and 4-leg orders, respectively.
-  * Returns 1 if command accepted, 0 if rejected.
-  * To use, call the function and then call the orders immediately.
-  * For example, if you SET_COMBO_LEGS to 2 and then request two options orders, the order will finally process after the second options order is received.
-  * If the order fails, the last leg will return a failure.  The script writer will be responsible for zeroing out the prior legs.
-  * All of the legs must have matching **expiration months** and **underlying symbols**.  Otherwise, the order will not be submitted.
 
 ## Known Issues
-(TODO: list known issues)
+* As of this writing, it is not possible to support standard broker commands GET_FUTURES and GET_OPTIONS.  This will be possible as soon as Sierra Chart supports getting symbols by underlying.  Per my discussions with their support, it is likely they will support acquiring futures symbols and not options symbols.  As a workaround to this, search for the individual symbols directly using the GET_DTCSECURITYDEF BrokerCommand.  
 
 ## License
 
@@ -166,8 +159,11 @@ This project has an MIT-style license. See the LICENSE.md file for more details.
 
 * [The Zorro Project](http://zorro-project.com/)
 * [The Zorro Project - Manual](http://zorro-project.com/manual/)
-* [Ally Invest](https://www.ally.com/invest/)
-* [Ally Invest API Documentation](https://www.ally.com/api/invest/documentation/getting-started/)
+* [Sierra Chart](http://www.sierrachart.com)
+* [DTC Protocol](http://www.dtcprotocol.com)
+* [Boost](https://www.boost.org)
+* [OpenSSL](https://www.openssl.org)
+* [zlib](https://www.zlib.net)
 
 ## Contact Info
 
