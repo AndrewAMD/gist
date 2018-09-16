@@ -52,8 +52,16 @@ If you need multiple instances of Sierra Chart to trade with two brokers at the 
 
 ## Configuring Zorro
 
-(TODO: Define all parsed fields in Username)
-(TODO: Define password
+The user field gets parsed for multiple arguments.  The format is:
+* "field1:value1 field2:value2"
+
+Fields:
+* "sa" - Sierra Chart Account - only required if Authentication is enabled for the DTC Server. By default, blank.
+* "ta" - Trade Account - required for live trading or demo trading, but not platform-level simulated trading.  By default, "Sim1"
+* "h" - DTC server hostname. Default value: "127.0.0.1" (localhost - the same computer)
+* "p1" - Listening Port. Default value: "11099"
+* "p2" - TLS Historical Data Port. Default value: "11097"
+* "zlib" - If this flag is provided, zlib will be enabled for historical connections.  Otherwise, this will be disabled.  This is an ideal setting for transfering data over the internet - and not ideal for when DTC is hosted on the same computer.
 
 
 ## Login Instructions
