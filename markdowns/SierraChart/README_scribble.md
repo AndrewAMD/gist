@@ -109,7 +109,44 @@ The following standard Zorro Broker API functions have been implemented:
 
 In addition, BrokerCommand supports some newly-defined functions:
 * SET\_DIVIDEND\_ADJ
+  * Input: 1 for dividend-adjusted historical data, 0 for unadjusted historical data.
+  * Returns 1 if command accepted, 0 if rejected.
 * GET\_DTCSECURITYDEF
+  * Input: Pointer to a DTCSECURITYDEF struct. GET\_DTCSECURITYDEF will look up a Security with symbol set with SET_SYMBOL.
+  * Returns: 1 if operation was successful, 0 if failed.
+```
+#define SET_DIVIDEND_ADJ 140 // Input 1 to enable dividend adjusted history, 0 for no dividend adjustment
+#define GET_DTCSECURITYDEF 69 
+typedef struct DTCSECURITYDEF
+{
+	char Symbol[64];
+	char Exchange[16];
+	int SecurityType;					// See DTC SecurityTypeEnum
+	char Description[64];
+	float MinPriceIncrement;
+	int PriceDisplayFormat;				// see DTC PriceDisplayFormatEnum
+	float CurrencyValuePerIncrement;
+	float FloatToIntPriceMultiplier;
+	float IntToFloatPriceDivisor;
+	char UnderlyingSymbol[32];
+	bool UpdatesBidAskOnly;
+	float StrikePrice;
+	int PutOrCall;						// 0: unset, 1: call, 2: put
+	unsigned int ShortInterest;
+	unsigned int SecurityExpirationDate;
+	float BuyRolloverInterest;
+	float SellRolloverInterest;
+	float EarningsPerShare;
+	unsigned int SharesOutstanding;
+	float IntToFloatQuantityDivisor;
+	bool HasMarketDepthData;
+	float DisplayPriceMultiplier;
+	char ExchangeSymbol[64];
+	float InitialMarginRequirement;
+	float MaintenanceMarginRequirement;
+	char Currency[8];
+} DTCSECURITYDEF;
+```
 * EXAMPLE\_BC
   * Input: Only accepts 2, 3, or 4 as an input, for 2-leg, 3-leg, and 4-leg orders, respectively.
   * Returns 1 if command accepted, 0 if rejected.
