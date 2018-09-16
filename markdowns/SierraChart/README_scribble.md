@@ -114,7 +114,7 @@ In addition, BrokerCommand supports some newly-defined functions:
 * GET\_DTCSECURITYDEF
   * Input: Pointer to a DTCSECURITYDEF struct. GET\_DTCSECURITYDEF will look up a Security with symbol set with SET_SYMBOL.
   * Returns: 1 if operation was successful, 0 if failed.
-```
+```c++
 #define SET_DIVIDEND_ADJ 140 // Input 1 to enable dividend adjusted history, 0 for no dividend adjustment
 #define GET_DTCSECURITYDEF 69 
 typedef struct DTCSECURITYDEF
