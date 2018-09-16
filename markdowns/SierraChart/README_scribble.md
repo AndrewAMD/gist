@@ -91,31 +91,26 @@ The following standard Zorro Broker API functions have been implemented:
 * BrokerHistory2
 * BrokerBuy2 (orders only)
 * BrokerTrade (orders only)
-
 * BrokerCommand standard functions:
-  * GET_MAXTICKS
-  * SET_HWND
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * aaaaaaaaa
-  * SET\_DIVIDEND\_ADJ (new BrokerCommand)
-  * GET_DTCSECURITYDEF (new Broke
+  * GET\_MAXTICKS
+  * SET\_HWND
+  * SET\_SYMBOL
+  * GET\_VOLTYPE
+  * SET\_VOLTYPE
+  * GET\_PRICETYPE
+  * SET\_PRICETYPE
+  * SET\_ORDERTYPE
+  * GET\_UUID
+  * SET\_UUID
+  * GET\_POSITION
+  * GET\_COMPLIANCE
+  * SET\_PATCH
 
-These BrokerCommand functions have originated with this plugin:
+
+In addition, BrokerCommand supports some newly-defined functions:
 * SET\_DIVIDEND\_ADJ
 * GET\_DTCSECURITYDEF
-* EXAMPLE
+* EXAMPLE\_BC
   * Input: Only accepts 2, 3, or 4 as an input, for 2-leg, 3-leg, and 4-leg orders, respectively.
   * Returns 1 if command accepted, 0 if rejected.
   * To use, call the function and then call the orders immediately.
