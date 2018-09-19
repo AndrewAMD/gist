@@ -42,6 +42,7 @@ To set up Sierra Chart's DTC Server:
 * SC Server Settings
   * Check "Enable DTC Protocol Server"
   * Check "Require TLS"
+  * Encoding must either be set to "Automatic" or "Binary"
   * Optional: Check "Allow Trading"
   * Optional: Check "Require Authentication"
   * Optional: If you have multiple installations of Sierra Chart, make sure that each installation has unique DTC ports.  For example, installation 1 uses ports 11099, 11098, and 11097, and installation 2 uses ports 11096, 11095, and 11094 for the Listening Port, Historical Data Port, and the TLS Historical Data Port, respectively.
@@ -57,8 +58,11 @@ If you need multiple instances of Sierra Chart to trade with two brokers at the 
 
 ## Configuring Zorro
 
-The user field gets parsed for multiple arguments.  The format is:
+The user field gets parsed for multiple arguments.  Each argument is separated by a space character.  The format is:
 * "field1:value1 field2:value2"
+
+For example, the user field can look like this:
+* "sa:1234 ta:5678 h:127.0.0.1 p1:11099 p2:11097 zlib"
 
 Fields:
 * "sa" - Sierra Chart Account - only required if the DTC Server has "Require Authentication" checked. By default, this field is blank.
@@ -66,11 +70,9 @@ Fields:
 * "h" - DTC server hostname. Default value: "127.0.0.1" (localhost - the same computer)
 * "p1" - Listening Port. Default value: "11099"
 * "p2" - TLS Historical Data Port. Default value: "11097"
-* "zlib" - If this flag is provided, zlib will be enabled for historical connections.  By default, disabled.  This is an ideal setting for transfering data over the internet - and not ideal for when DTC is hosted on the same computer.
+* "zlib" - If this flag is provided, zlib will be enabled for transfer of historical data.  By default, disabled.  This setting reduces bandwidth between Zorro and the DTC server, but it increases the processing load.
 
-For example, to set all the fields to their default value, leave the user field completely blank.  This configuration is acceptable if these are your settings:
-
-
+To set all the fields to their default value, leave the user field completely blank.  This configuration is compatible with the default DTC server settings shown above.
 
 ## Login Instructions
 
