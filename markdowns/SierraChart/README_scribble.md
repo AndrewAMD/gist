@@ -74,26 +74,6 @@ Fields:
 
 To set all the fields to their default value, leave the user field completely blank.  This configuration is compatible with the default DTC server settings shown above.
 
-## Login Instructions
-
-To login with the Ally Plugin, you will first need to set up API access with Ally Invest. After you have set up your account with Ally, you must do the following:
-
-* Go to https://www.ally.com/invest/
-* Click Log In and enter your credentials
-* Click on your account (usually says "individual", depending on your type of account).
-* At the top, go to "Tools" -> "Ally Invest API" -> "Manage Applications"
-* Create a "Personal Application", and follow the steps. Your new application should have been created instantly.
-* Scroll down. Under "Developer Applications", click on the application you created.
-* You should see four scrambled keys.  You will need these.
-* Open Zorro.  
-* Set "Account" to "Real", and choose the "Ally Invest" plugin from the drop-down menus.
-* Under "User", enter your account number (not to be confused with your website login username)
-* For the password, paste the values in one after the other, in the exact order below (no spaces, no commas):
-  1. Consumer Key
-  2. Consumer Secret
-  3. OAuth Token
-  4. OAuth Token Secret
-
 ## Plugin Capabilities
 
 The following standard Zorro Broker API functions have been implemented:
