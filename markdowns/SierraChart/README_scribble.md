@@ -45,7 +45,8 @@ To set up Sierra Chart's DTC Server:
   * Optional: Check "Allow Trading"
   * Optional: Check "Require Authentication"
   * Optional: If you have multiple installations of Sierra Chart, make sure that each installation has unique DTC ports.  For example, installation 1 uses ports 11099, 11098, and 11097, and installation 2 uses ports 11096, 11095, and 11094 for the Listening Port, Historical Data Port, and the TLS Historical Data Port, respectively.
-  * Click OK
+  * Optional: Allowed Incoming IP's should be set to "Local Computer Only", unless you plan on accessing this installation from another computer on the LAN (Local Subnet Only) or the Internet (Any IP).  (If you are opening the port to the interet, consider requiring authentication.)
+  * Click OK.
 
 Here are the "ideal default settings", for simply accessing the platform on your own computer:
 ![Ideal default settings](https://raw.githubusercontent.com/AndrewAMD/gist/master/images/screenshots/0001.JPG)
