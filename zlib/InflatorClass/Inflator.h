@@ -5,18 +5,16 @@
 #include "zlib.h"
 #include <vector>
 typedef std::vector<char> v_char;
-typedef std::vector<v_char> vv_char;
 
-class inflator
+class Inflator
 {
 public:
-	inflator();
-	~inflator();
+	Inflator();
+	~Inflator();
 	void reset();
-	int inf(const v_char& in);
-	bool can_get_spliced_output(v_char& out);
+	int inf(const v_char& in, v_char& out);
+	bool is_done();
 private:
-	vv_char _chunks_out;
 	z_stream _strm;
 	bool _ready;
 };
