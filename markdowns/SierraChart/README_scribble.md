@@ -12,8 +12,9 @@ This plugin was written in Win32 C/C++ using Visual Studio 2017.
 
 This plugin depends on the following libraries:
 
-* Boost Asio 1.66 (for asynchronous network communications)
-* Boost UUID (to generate order Client ID's)
+* Boost libraries, 1.67 or greater
+  * Boost Asio (for asynchronous network communications)
+  * Boost UUID (to generate order Client ID's)
 * OpenSSL (for TLS 1.2 encryption)
 * zlib (optional historical data compression)
 * DTC Protocol library
