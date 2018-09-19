@@ -1,15 +1,15 @@
 #include "Inflator.h"
 
-inflator::inflator() :
+Inflator::Inflator() :
 	_ready(false)
 {
 	reset();
 }
-inflator::~inflator()
+Inflator::~Inflator()
 {
 	inflateEnd(&_strm);
 }
-void inflator::reset()
+void Inflator::reset()
 {
 	if (_ready)
 	{
@@ -21,11 +21,10 @@ void inflator::reset()
 	_strm.opaque = Z_NULL;
 	//_strm.total_out = 0;
 	inflateInit(&_strm);
-	_chunks_out.clear();
 }
-int inflator::inf(const v_char& in)
+int Inflator::inf(const v_char& in, v_char& out)
 {
-	v_char out;
+	//v_char out;
 	int before = _strm.total_out, after = 0;
 
 	out.resize(in.size() * 20);
@@ -44,7 +43,6 @@ int inflator::inf(const v_char& in)
 	//printf("Uncompressed size is: %lu\n", out.size());
 	//printf("Uncompressed string is: %s\n", out.data());
 	//printf("inf return value: %d\n", ret);
-	if (out.size())_chunks_out.push_back(out);
 	switch (ret)
 	{
 	case Z_OK: // There is more to decompress.  Nothing to do.
@@ -78,28 +76,9 @@ int inflator::inf(const v_char& in)
 	}
 	return ret;
 }
-bool inflator::can_get_spliced_output(v_char& out)
-{
-	if (!_ready) return false;
-	// get spliced size
-	int size = 0;
-	for (const auto& a : _chunks_out)
-	{
 
-		for (const auto& b : a)
-		{
-			size++;
-		}
-	}
-	//printf("size: %d\n", size);
-	out.reserve(size);
-	for (const auto& a : _chunks_out)
-	{
-		for (const auto& b : a)
-		{
-			out.push_back(b);
-		}
-	}
-	//printf("\n\nFinal message: \n%s\n", out.data());
-	return true;
+bool Inflator::is_done()
+{
+	return _ready;
 }
+
