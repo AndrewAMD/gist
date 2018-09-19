@@ -1,7 +1,8 @@
-﻿#include "Inflator.h"
+#include "Inflator.h"
 #include <iostream>
 #include <string>
 #include <algorithm>
+typedef std::vector<std::vector<char>> vv_char;
 
 int def(const v_char& input, v_char& output) // <----------- start with this
 {
@@ -69,7 +70,7 @@ int main(int argc, char* argv[])
 	printf("\n----------\n\n");
 
 
-	v_char bb;
+	v_char bb, cc1;
 	//bb.resize(aa.size() * 2);
 	def(aa, bb);
 
@@ -80,24 +81,30 @@ int main(int argc, char* argv[])
 
 
 
-	inflator i1, i2;
-	i1.inf(bb);
-	v_char cc1;
-	i1.can_get_spliced_output(cc1);
-	printf("cc1: %s\n", cc1.data());
+	Inflator i1, i2;
+	i1.inf(bb, cc1);
+	//v_char cc1;
+	//i1.can_get_spliced_output(cc1);
+	printf("cc1:    %s\n", cc1.data());
 
 
 	vv_char bb_split;
 	split(bb, bb_split, 3);
+	v_char merged;
 	for (const auto& b : bb_split)
 	{
-		auto ret = i2.inf(b);
+		v_char out;
+		auto ret = i2.inf(b,out);
+		auto it = std::next(out.begin(), out.size());
+		std::move(out.begin(), it, std::back_inserter(merged));  // ##
+
+		out.erase(out.begin(), it);
+
+
 		std::cout << ret << ", ";
 	}
 	std::cout << std::endl;
-	v_char cc2;
-	i2.can_get_spliced_output(cc2);
-	printf("cc2: %s\n", cc1.data());
+	printf("merged: %s\n", merged.data());
 
 	return 0;
 }
