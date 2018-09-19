@@ -54,7 +54,7 @@ Here are the "ideal default settings", for simply accessing the platform on your
 
 If you need multiple instances of Sierra Chart to trade with two brokers at the same time, you will need a second installation of Sierra Chart on your computer.  Do do this:
 * Follow [these instructions](https://www.sierrachart.com/index.php?page=doc/NewInstance.php).
-* Also, make sure that the DTC Ports are different for every
+* Also, make sure that the DTC Ports are unique for every Sierra Chart installation on the same host.
 
 ## Configuring Zorro
 
