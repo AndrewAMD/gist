@@ -160,6 +160,8 @@ This project has an MIT-style license. See the LICENSE.md file for more details.
 * [Sierra Chart](http://www.sierrachart.com)
 * [DTC Protocol](http://www.dtcprotocol.com)
 * [Boost](https://www.boost.org)
+  * [Boost Asio](https://www.boost.org/doc/libs/1_68_0/doc/html/boost_asio.html)
+  * [Boost UUID](https://www.boost.org/doc/libs/1_68_0/libs/uuid/doc/index.html)
 * [OpenSSL](https://www.openssl.org)
 * [zlib](https://www.zlib.net)
 
