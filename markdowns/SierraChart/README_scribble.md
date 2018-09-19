@@ -154,7 +154,9 @@ This project has an MIT-style license. See the LICENSE.md file for more details.
 ## Resources
 
 * [The Zorro Project](http://zorro-project.com/)
-* [The Zorro Project - Manual](http://zorro-project.com/manual/)
+  * [Manual](http://zorro-project.com/manual/)
+  * [Broker API](http://zorro-project.com/manual/en/brokerplugin.htm)
+  * [BrokerCommand](http://zorro-project.com/manual/en/brokercommand.htm)
 * [Sierra Chart](http://www.sierrachart.com)
 * [DTC Protocol](http://www.dtcprotocol.com)
 * [Boost](https://www.boost.org)
