@@ -4,6 +4,10 @@
 #include "pch.h"
 #include <Windows.h>
 #include <stdio.h>
+#include <thread>
+#include <chrono>
+namespace cro = std::chrono;
+
 
 int main()
 {
@@ -45,8 +49,18 @@ int main()
 	for (int i = 0; i < 3; i++) {
 		printf("age: %d, height: %0.2f\"\n", d[i].age, d[i].height);
 	}
+	
+	typedef void(__cdecl * task)(void);
+	task roar = []() {printf("roar\n"); };
 
+	void(__cdecl * GiveMeTask)(task) = NULL;
+	GiveMeTask = (void(__cdecl*)(task))GetProcAddress(hLibDll, "GiveMeTask");
+	GiveMeTask(roar);
 
+	void(__cdecl * DoGoroutine)(void) = NULL;
+	DoGoroutine = (void(__cdecl*)(void))GetProcAddress(hLibDll, "DoGoroutine");
+	DoGoroutine();
+	std::this_thread::sleep_for(cro::seconds(12));
 	
 
 }
