@@ -57,9 +57,17 @@ int main()
 	GiveMeTask = (void(__cdecl*)(task))GetProcAddress(hLibDll, "GiveMeTask");
 	GiveMeTask(roar);
 
+	void(__cdecl * PrintThreadID)(void) = NULL;
+	PrintThreadID = (void(__cdecl*)(void))GetProcAddress(hLibDll, "PrintThreadID");
+	PrintThreadID();
+	int thd_id = (int)GetCurrentThreadId();
+	printf("Cpp thd_id: %d\n\n", thd_id);
+
+
 	void(__cdecl * DoGoroutine)(void) = NULL;
 	DoGoroutine = (void(__cdecl*)(void))GetProcAddress(hLibDll, "DoGoroutine");
 	DoGoroutine();
+	printf("return\n");
 	std::this_thread::sleep_for(cro::seconds(12));
 	
 
