@@ -1,6 +1,7 @@
 package main
 
 /*
+#include <Windows.h>
 #include <string.h>
 typedef struct sDemo{
     int age;
@@ -85,6 +86,7 @@ func countOutLoud() {
 	for i := 0; i <= 10; i++ {
 		fmt.Println(i)
 		duration := time.Second
+		PrintThreadID()
 		time.Sleep(duration)
 	}
 }
@@ -92,13 +94,24 @@ func countOutLoud() {
 //export DoGoroutine
 func DoGoroutine() {
 	go countOutLoud()
+	duration := 5 * time.Second
+	time.Sleep(duration)
+	PrintThreadID()
 }
+
+type funcDoTask *func()
 
 //export GiveMeTask
 func GiveMeTask(task unsafe.Pointer) {
 	fmt.Println("doing task...")
 	C.dotask((C.pTask)(task))
 	fmt.Println("task completed...")
+}
+
+//export PrintThreadID
+func PrintThreadID() {
+	thdId := C.GetCurrentThreadId()
+	fmt.Println("golang thd_id: ", int32(thdId))
 }
 
 func main() {
