@@ -3,6 +3,7 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 var WebSocket = require('ws');
 
 // dtc
+const LOGON_REQUEST = 1;
 const HEARTBEAT = 3;
 
 
