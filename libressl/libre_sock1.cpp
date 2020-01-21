@@ -39,8 +39,8 @@ This builds in Visual Studio 2017, using Winsock2, LibreSSL, and the DTC protoco
 
 struct s_Header
 {
-	uint16_t Size=0;
-	uint16_t Type=0;
+	uint16_t Size = 0;
+	uint16_t Type = 0;
 };
 
 
@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
 	char bufs[1000], bufc[1000];
 	struct sockaddr_in server;
 	struct pollfd pfd[2];
-	
+
 
 	tls_init();
 
@@ -142,7 +142,7 @@ int main(int argc, char **argv) {
 				DTC::s_LogonResponse m;
 				m.CopyFrom(bufs);
 				printf("received logon response\n");
-				printf("result: %s\n",m.GetResultText());
+				printf("result: %s\n", m.GetResultText());
 				printf("server name: %s\n", m.GetServerName());
 				break;
 			}
@@ -160,7 +160,7 @@ int main(int argc, char **argv) {
 				m.CopyFrom(bufs);
 				printf("received logoff\n");
 				printf("reason: %s\n", m.GetReason());
-				exit = true;
+				need_to_quit = true;
 				break;
 			}
 			}
