@@ -134,7 +134,7 @@ int main(int argc, char **argv) {
 		}
 
 		if (pfd[1].revents & POLLIN) {
-			bool exit = false;
+			bool need_to_quit = false;
 			if ((outlen = tls_read(tls, bufs, 1000)) <= 0) break;
 			s_Header* pH = (s_Header*)bufs;
 			switch (pH->Type) {
@@ -164,7 +164,7 @@ int main(int argc, char **argv) {
 				break;
 			}
 			}
-			if (exit) break;
+			if (need_to_quit) break;
 		}
 	}
 
